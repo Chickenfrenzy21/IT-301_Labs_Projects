@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #box {
+            background-color: blue;
+            font-size: 1.2em;
+            width: 200px;
+            padding: 3px;
+            color: white;
+        }
+        #eventbox {
+            height: 75vh;
+        }
+        #box:hover {
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div id = "box">Click me!😊</div>
+    <div id = "eventbox"></div>
+    <script>
+        const box = document.getElementById('box');
+        const eventbox = document.getElementById('eventbox');
+        function dontClick(event) {
+            box.style.backgroundColor = 'yellow';
+            box.textContent = 'Do not click! 😠';
+        }
+        function ouch(event) {
+            box.style.backgroundColor = 'red';
+            box.textContent = 'Ouch! 🤕';
+        }
+        function phew(event) {
+            box.style.backgroundColor = 'lightgreen';
+            box.textContent = 'Phew! 😌';
+        }
+        function doubleTrouble(event) {
+            box.style.backgroundColor = 'pink';
+            box.textContent = 'Double trouble! 🤩'
+        }
+        function iSeeYou(event) {
+            box.style.backgroundColor = 'lightblue';
+            box.textContent = 'I see you! 👀'
+        }
+        box.addEventListener('mouseover', dontClick);
+        box.addEventListener('click', ouch);
+        box.addEventListener('mouseout', phew);
+        box.addEventListener('dblclick', doubleTrouble);
+        eventbox.addEventListener('mousemove', iSeeYou);
+    </script>
+</body>
+</html>
