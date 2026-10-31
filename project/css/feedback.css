@@ -1,0 +1,5 @@
+
+#feedback label {
+    display: inline-block;
+    width: 100px; /* Ensures that both field sections of the form are lined up. */
+}

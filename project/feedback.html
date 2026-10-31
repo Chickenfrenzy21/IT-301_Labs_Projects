@@ -5,24 +5,37 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Harrisonburg Hikes Feedback</title>
     <link rel="stylesheet" href="css/headerstyle.css">
+    <link rel="stylesheet" href="css/feedback.css">
 </head>
 <body>
+    <!-- Header and navigation -->
     <header>
         <h1>Harrisonburg Hikes</h1>
         <nav>
             <ul>
                 <li><a href = "index.html">Homepage</a></li>
                 <li><a href = "trails.html">Five Trails You Should Hike in Harrisonburg</a></li>
-                <li><a href = "gear.html">Preparations for Hiking</a></li>
+                <li><a href = "gear.html">Essential Hiking Gear</a></li>
                 <li><a href = "hikingtips.html">Hiking Tips</a></li>
-                <li><a href = "feedback.html">Tell us your thoughts</a></li>
+                <li><a href = "feedback.html">Subscribe to our newsletter</a></li>
             </ul>
         </nav>
     </header>
+    <!-- Main page content -->
     <main>
-        <form id = "feedback" onsubmit ="update(event)">
-            
+        <div>We often update our website with new information about how to prepare for your hiking adventures, new trails to hike, and other related news. We also send out a weekly newsletter to keep hikers updated with these changes. To subscribe to our newsletter, please provide your name and email in the below form. </div>
+        <br>
+        <form id = "feedback" action="#">
+            <label for = "name">Your name: </label>
+            <input type = "text" id = "name" name = "name" required>
+            <br>
+            <label for = "email">Email: </label>
+            <input type = "email" id = "email" name = "email" required>
+            <br>
+            <input type = "submit" value = "submit">
         </form>
-    </main>    
+    </main>
+    <!-- Footer with contact information -->
+    <footer>Additionally, if you want to provide us with any feedback on our website, email us at harrisonburghikes@gmail.com!</footer>    
 </body>
 </html>

@@ -5,12 +5,14 @@ header{
     position: sticky;
     top: 0px;
     font-family: sans-serif;
-    /* display: inline-block; */
     border: 10px solid #15370D;
     background-color: #15370D;
     box-sizing: border-box;
     width: 100%;
     color: white;
+}
+body {
+    font-family: 'Times New Roman', Times, serif;
 }
 nav ul{ 
       padding: 10px;
@@ -22,14 +24,43 @@ nav ul{
 a {
     color: #E5CD82;
 }
+nav a {
+    position: relative;
+}
+nav a:hover {
+    top: -2px; /* Gives the links a cool hover effect when hovering over them */
+}
 main {
     display: flex;
     flex-direction: column;
-    align-items: center;
     border: 10px solid #FFF2b4;
     background-color: #FFF2b4;
     box-sizing: border-box;
     width: 100%;
     color: #728E6D;
+    padding: 1rem;
     min-height: 100vh; /* min-height here to ensure background always covers entire screen. */
+}
+footer {
+    background-color: #15370D;
+    color: white;
+    font-family: sans-serif;
+    padding: 1.5rem;
+    text-align: center;
+}
+/* Makes header static and changes the nav links to be more readable on smaller screens */
+@media (max-width: 600px) {
+    header {
+        position: static;
+    }
+    nav ul {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+}
+/* Increases font size for larger screens */
+@media (min-width: 900px) {
+    main {
+        font-size: 1.2rem;
+    }
 }
