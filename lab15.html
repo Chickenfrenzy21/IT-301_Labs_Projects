@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Posts </title>
+
+    <style>
+       body {
+          background-color: #f0f2f5;
+          font-family: Helvetica, Arial, sans-serif;
+       }
+
+       form {
+          min-height: 180px;
+       }
+
+       article, form {
+          background-color: #ffffff;
+          border-radius: 8px;
+          box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+          padding: 12px 16px;
+          margin-bottom: 16px;
+          max-width: 680px;
+          margin-left: auto;
+          margin-right: auto;
+       }
+
+       h2 {
+          color: #050505;
+          font-size: 0.9375rem;
+          font-weight: 600;
+          margin: 0 0 4px 0;
+       }
+
+       p {
+          color: #050505;
+          font-size: 0.9375rem;
+          line-height: 1.3333;
+          margin: 8px 0 0 0;
+       }
+    </style>
+</head>
+
+<body>
+<h1> Welcome to my Posts page! </h1>
+
+    <form action="#">
+
+        <label for="userID">Select User:</label>
+        <select id="userID">
+            <option value="">--Please choose an option--</option>
+            <option value="1">User 1</option>
+            <option value="2">User 2</option>
+            <option value="3">User 3</option>
+            <option value="4">User 4</option>
+            <option value="5">User 5</option>
+            <option value="6">User 6</option>
+            <option value="7">User 7</option>
+        </select>
+
+        <button type="button" id="filterBtn">Filter</button>
+
+        <br><br>
+
+        <label for="displayUserID">Enter User ID:</label>
+        <input type="number" id="displayUserID" min="1" max="10">
+
+        <button type="button" id="displayUserBtn">Display User Posts</button>
+
+        <br><br>
+
+        <label for="postID">Enter Post ID:</label>
+        <input type="number" id="postID" min="1" max="100">
+
+        <button type="button" id="findBtn">Find</button>
+
+    </form>
+
+    <script>
+      const site = 'https://jsonplaceholder.typicode.com/posts';
+      const userID = document.getElementById('userID');
+      const displayUserID = document.getElementById('displayUserID');
+      const postID = document.getElementById('postID');
+      const filterBtn = document.getElementById('filterBtn');
+      const displayUserBtn = document.getElementById('displayUserBtn');
+      const findBtn = document.getElementById('findBtn');
+      const get = async()=> {
+         try {
+            let response = await fetch(site);
+            response = await response.json();
+            for (let i = 0; i < response.length; i++) {
+               console.log(response[i]);
+               let title = document.createElement('h2');
+               let pbody = document.createElement('p');
+               let post = document.createElement('article');
+               title.textContent = response[i].title;
+               pbody.textContent = response[i].body;
+               document.body.appendChild(post);
+               post.appendChild(title);
+               post.appendChild(pbody);
+            }
+         } catch {(error)=>console.log(error)}
+      }
+      const filterGet = async()=> {
+         try {
+            let userIDSelected = Number(userID.value);
+            let response = await fetch(site);
+            response = await response.json();
+            for (let i = 0; i < response.length; i++) {
+               if ((userIDSelected === 0) || (response[i].userId === userIDSelected)){
+               console.log(response[i]);
+               }
+            }
+         } catch {(error)=>console.log(error)}
+      }
+      const displayPosts = async()=> {
+         try {
+            let displayUserIDSelected = Number(displayUserID.value);
+            let response = await fetch(site);
+            response = await response.json();
+            document.querySelectorAll('article').forEach((article) => {
+               article.remove();
+            });
+            for (let i = 0; i < response.length; i++) {
+               if ((displayUserIDSelected === 0) || (response[i].userId === displayUserIDSelected)){
+               let title = document.createElement('h2');
+               let pbody = document.createElement('p');
+               let post = document.createElement('article');
+               title.textContent = response[i].title;
+               pbody.textContent = response[i].body;
+               document.body.appendChild(post);
+               post.appendChild(title);
+               post.appendChild(pbody);
+               }
+            }
+         } catch {(error)=>console.log(error)}
+      }
+      const findPost = async()=> {
+         try {
+            let postIDSelected = Number(postID.value);
+            let response = await fetch(site);
+            let found = false;
+            response = await response.json();
+            document.querySelectorAll('article').forEach((article) => {
+               article.remove();
+            });
+            for (let i = 0; i < response.length; i++) {
+               if ((response[i].id === postIDSelected)){
+               console.log(response[i]);
+               let title = document.createElement('h2');
+               let pbody = document.createElement('p');
+               let post = document.createElement('article');
+               title.textContent = response[i].title;
+               pbody.textContent = response[i].body;
+               document.body.appendChild(post);
+               post.appendChild(title);
+               post.appendChild(pbody);
+               found = true;
+               } 
+            }
+            if (found === false) {
+               let title = document.createElement('h2');
+               let pbody = document.createElement('p');
+               let post = document.createElement('article');
+               title.textContent = 'POST NOT FOUND: Please Enter A Valid Post ID';
+               pbody.textContent = '';
+               document.body.appendChild(post);
+               post.appendChild(title);
+               post.appendChild(pbody);
+            }
+         } catch {(error)=>console.log(error)}
+      }
+      get();
+      filterBtn.addEventListener('click', filterGet);
+      displayUserBtn.addEventListener('click', displayPosts);
+      findBtn.addEventListener('click', findPost);
+    </script>
+
+</body>
+</html>
