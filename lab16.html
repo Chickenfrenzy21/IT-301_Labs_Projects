@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .valid{
+            color: green;
+        }
+        .invalid{
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <form id="form" name="form">
+        <label for="name">Name:</label>
+        <input type="text" id="name" required>
+        <label for="email">Email:</label>
+        <input type="email" id="email" required>
+        <label for="password">Password:</label>
+        <input type="password" id="password" required>
+        <p id="rule1"></p>
+        <p id="rule2"></p>
+        <p id="rule3"></p>
+    </form>
+    <button id="submitbtn" form="form" type="submit">Submit</button>
+    <script>
+        const name = document.getElementById('name');
+        const email = document.getElementById('email');
+        const password = document.getElementById('password');
+        const submitbtn = document.getElementById('submitbtn');
+        const form = document.getElementById('form');
+        password.addEventListener('input', (event)=>{
+            const rule1 = document.getElementById('rule1');
+            const rule2 = document.getElementById('rule2');
+            const rule3 = document.getElementById('rule3');
+            rule1.textContent = 'Password must contain at least 6 characters';
+            rule2.textContent = 'Password must include a special character (!@#$...)';
+            rule3.textContent = 'Password must include an uppercase letter (A-Z)';
+            rule1.classList.toggle('valid', password.value.length >=6)
+            rule1.classList.toggle('invalid', !(password.value.length >=6))
+            rule2.classList.toggle('valid', /[!@#$%^&*(),.?":{}|<>]/.test(password.value))
+            rule2.classList.toggle('invalid', !(/[!@#$%^&*(),.?":{}|<>]/.test(password.value)))
+            rule3.classList.toggle('valid', /[A-Z]/.test(password.value))
+            rule3.classList.toggle('invalid', !(/[A-Z]/.test(password.value)))
+        })
+        form.addEventListener('submit', (event)=>{
+            event.preventDefault();
+            window.location.href = 'success.html';
+        })
+    </script>
+</body>
+</html>
